@@ -21,7 +21,7 @@ def convert_to_dictionary(text):
 def check_result_length(dictionary):
 	return len(dictionary['result'])
 
-def store_data(dictionary, bucket):
+def store_data(zip_code, dictionary, bucket):
 	for i in range(len(dictionary['result'])):
 		#print({**{'zip_code':zip_code}, **dictionary['result'][i]})
 		bucket.append({**{'zip_code':zip_code}, **dictionary['result'][i]})
@@ -33,7 +33,7 @@ def main_sequence(zip_code):
 	dictionary = convert_to_dictionary(text)
 	length = check_result_length(dictionary)
 	if length>0:
-		store_data(dictionary, data_bucket)
+		store_data(zip_code, dictionary, data_bucket)
 
 zip_codes = pd.read_csv('import.csv').codes.tolist()
 
